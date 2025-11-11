@@ -67,6 +67,12 @@ export const createInquiry = async (req, res) => {
       createdAt: new Date(),
     };
 
+    // Choose target email (redirect support)
+    const targetEmail =
+      process.env.REDIRECT_EMAIL && process.env.REDIRECT_EMAIL.trim() !== ""
+        ? process.env.REDIRECT_EMAIL.trim()
+        : process.env.ADMIN_EMAIL;
+
     // Prepare email content
     const adminSubject = `New Inquiry — ${saved.parentName}`;
     const adminHtml = `
@@ -103,20 +109,21 @@ export const createInquiry = async (req, res) => {
       </div>
     `;
 
-    // Send response to frontend immediately (non-blocking)
+    // Send response instantly (don’t wait for Gmail)
     res.status(201).json({
       ok: true,
       message: "Inquiry processed successfully (emails queued)",
       contact: saved,
     });
 
-    // Send emails asynchronously (after response)
+    // Send emails in background (redirect-aware)
     Promise.allSettled([
       sendMail({
-        to: process.env.ADMIN_EMAIL,
+        to: targetEmail,
         subject: adminSubject,
         html: adminHtml,
         text: `New inquiry from ${saved.parentName}: ${saved.message}`,
+        replyTo: saved.email, // so admin can reply directly to user
       }),
       sendMail({
         to: saved.email,
@@ -126,7 +133,10 @@ export const createInquiry = async (req, res) => {
       }),
     ])
       .then((results) => {
-        console.log("📧 Email send results:", results.map((r) => r.status));
+        console.log(
+          `📧 Email results [admin→${targetEmail}, user→${saved.email}]:`,
+          results.map((r) => r.status)
+        );
       })
       .catch((err) => console.error("❌ Email send error:", err.message));
   } catch (error) {
