@@ -1,4 +1,4 @@
- import React, { useState } from "react";
+import React, { useState } from "react";
 import { FaPhoneAlt, FaEnvelope, FaMapMarkerAlt } from "react-icons/fa";
 import { FaFacebookF, FaInstagram, FaXTwitter } from "react-icons/fa6";
 
@@ -121,7 +121,11 @@ export default function TopNavbar() {
               strokeWidth="2"
               stroke="currentColor"
             >
-              <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M19 9l-7 7-7-7"
+              />
             </svg>
           </button>
         </div>
@@ -164,13 +168,22 @@ export default function TopNavbar() {
             </a>
 
             <div className="flex items-center gap-3 px-2">
-              <a href="#" aria-label="Facebook" className="p-2 bg-white/10 rounded-md">
+              <a
+                href="https://www.facebook.com/share/1WinbTxPSC/?mibextid=wwXIfr "
+                aria-label="Facebook"
+                className="p-2 bg-white/10 rounded-md"
+              >
                 <FaFacebookF className="text-white text-base" />
               </a>
-              <a href="#" aria-label="Instagram" className="p-2 bg-white/10 rounded-md">
+              <a
+                href="https://www.instagram.com/autismabapartners?igsh=dTl2a2dodWQ3anR2&utm_source=qr
+"
+                aria-label="Instagram"
+                className="p-2 bg-white/10 rounded-md"
+              >
                 <FaInstagram className="text-white text-base" />
               </a>
-              <a href="#" aria-label="X" className="p-2 bg-white/10 rounded-md">
+              <a href="https://x.com/ABAPartner" aria-label="X" className="p-2 bg-white/10 rounded-md">
                 <FaXTwitter className="text-white text-base" />
               </a>
             </div>

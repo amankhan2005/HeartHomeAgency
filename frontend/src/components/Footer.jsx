@@ -136,21 +136,21 @@ export default function Footer() {
 
             <div className="flex items-center gap-3">
               <a
-                href="#"
+                href="https://www.facebook.com/share/1WinbTxPSC/?mibextid=wwXIfr "
                 aria-label="Facebook"
                 className="p-2 rounded-lg bg-white/5 hover:bg-white/10 transition-shadow shadow-sm focus:outline-none focus:ring-2 focus:ring-orange-300"
               >
                 <FaFacebookF />
               </a>
               <a
-                href="#"
+                href="https://x.com/ABAPartner"
                 aria-label="Twitter"
                 className="p-2 rounded-lg bg-white/5 hover:bg-white/10 transition-shadow shadow-sm focus:outline-none focus:ring-2 focus:ring-orange-300"
               >
                 <FaTwitter />
               </a>
               <a
-                href="#"
+                href="https://www.instagram.com/autismabapartners?igsh=dTl2a2dodWQ3anR2&utm_source=qr"
                 aria-label="Instagram"
                 className="p-2 rounded-lg bg-white/5 hover:bg-white/10 transition-shadow shadow-sm focus:outline-none focus:ring-2 focus:ring-orange-300"
               >
@@ -174,7 +174,7 @@ export default function Footer() {
               rel="noopener noreferrer"
               className="text-blue-400 hover:text-blue-300 transition"
             >
-              Webieapp
+              WebieApp
             </a>
           </div>
         </div>
