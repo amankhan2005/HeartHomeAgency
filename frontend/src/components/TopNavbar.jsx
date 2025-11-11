@@ -63,21 +63,21 @@ export default function TopNavbar() {
           {/* Right Side: Social Icons */}
           <div className="flex items-center gap-3">
             <a
-              href="#"
+              href="https://www.facebook.com/share/1WinbTxPSC/?mibextid=wwXIfr"
               aria-label="Facebook"
               className="p-2.5 bg-white/10 rounded-xl hover:bg-[#FBC02D] transition-transform transform hover:scale-110"
             >
               <FaFacebookF className="text-white text-base" />
             </a>
             <a
-              href="#"
+              href="https://www.instagram.com/autismabapartners?igsh=dTl2a2dodWQ3anR2&utm_source=qr"
               aria-label="Instagram"
               className="p-2.5 bg-white/10 rounded-xl hover:bg-[#FBC02D] transition-transform transform hover:scale-110"
             >
               <FaInstagram className="text-white text-base" />
             </a>
             <a
-              href="#"
+              href="https://x.com/ABAPartner"
               aria-label="X (Twitter)"
               className="p-2.5 bg-white/10 rounded-xl hover:bg-[#FBC02D] transition-transform transform hover:scale-110"
             >
