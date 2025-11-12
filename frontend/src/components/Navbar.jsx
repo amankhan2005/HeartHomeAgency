@@ -139,7 +139,7 @@ export default function MainNavbar() {
 
           {/* Mobile Menu Button - Enhanced */}
           <button
-            className="lg:hidden relative w-10 h-10 flex items-center justify-center rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors duration-300"
+            className="lg:hidden relative w-10 h-10 flex items-center justify-center rounded-lg  hover:bg-gray-100 transition-colors duration-300"
             onClick={() => setMenuOpen((prev) => !prev)}
             aria-label="Toggle Menu"
             aria-expanded={menuOpen}
