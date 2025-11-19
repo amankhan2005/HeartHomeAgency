@@ -15,6 +15,8 @@ import AdminDashboard from "./pages/Dashboard";
 import GlobalSettings from "./pages/GlobalSettings";
 import ContactsManager from "./pages/ContactsManager";
 import CareersManager from "./pages/CareersManager";
+import MapSettings from "./pages/MapSettings"; // ✅ FIX: correct import
+ 
 
 /* ---------------- AUTH WRAPPER ---------------- */
 function RequireAuth({ creds, children }) {
