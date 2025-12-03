@@ -2,32 +2,27 @@
 import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { FaBars, FaTimes, FaPhoneAlt, FaEnvelopeOpenText } from "react-icons/fa";
-import fallbackLogo from "../assets/autism-logo.webp";
+
+// ⬅️ Static logo import (new)
+import autismLogo from "../assets/autism-logo.webp";
+
 import { useSettings } from "../context/SettingsContext";
 
 export default function MainNavbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+
   const { settings } = useSettings();
 
-  // build backend-prefixed url when needed
-  const backend = (import.meta.env.VITE_BACKEND_URL || "").replace(/\/$/, "");
+  // ⬅️ STATIC LOGO ONLY (no backend, no dynamic)
+  const logoSrc = autismLogo;
 
-  // --- DYNAMIC VALUES (only these changed) ---
-  const logoRaw = settings?.logo || "";
-  const logoSrc = logoRaw
-    ? logoRaw.startsWith("http")
-      ? logoRaw
-      : `${backend}${logoRaw}`
-    : fallbackLogo;
-
+  // phone
   const phoneRaw = settings?.phone || "(410) 905-5477";
-  // create tel-friendly number (only digits + plus)
   const phoneTel = phoneRaw.replace(/[^+\d]/g, "");
 
+  // email
   const emailRaw = settings?.email || "info@autismabapartners.com";
-
-  // ------------------------------------------------
 
   // Handle scroll effect
   useEffect(() => {
@@ -38,7 +33,7 @@ export default function MainNavbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Close menu on escape key
+  // Close menu on ESC
   useEffect(() => {
     const handleEscape = (e) => {
       if (e.key === "Escape") setMenuOpen(false);
@@ -47,16 +42,9 @@ export default function MainNavbar() {
     return () => document.removeEventListener("keydown", handleEscape);
   }, []);
 
-  // Prevent body scroll when menu is open
+  // Disable body scroll when menu open
   useEffect(() => {
-    if (menuOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "unset";
-    }
-    return () => {
-      document.body.style.overflow = "unset";
-    };
+    document.body.style.overflow = menuOpen ? "hidden" : "unset";
   }, [menuOpen]);
 
   const navLinkClasses = ({ isActive }) =>
@@ -72,7 +60,8 @@ export default function MainNavbar() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
-          {/* Logo with hover effect */}
+          
+          {/* Logo */}
           <div className="flex items-center gap-3">
             <NavLink
               to="/"
@@ -81,27 +70,25 @@ export default function MainNavbar() {
             >
               <img
                 src={logoSrc}
-                alt="Autism ABA Partners logo"
+                alt="Autism ABA Partners Logo"
                 className={`object-contain transition-all duration-300 ${
                   scrolled ? "h-16" : "h-20"
                 }`}
               />
             </NavLink>
 
-            {/* MOBILE ONLY: phone + email next to logo */}
+            {/* Mobile phone + email */}
             <div className="flex-col items-start gap-0 lg:hidden">
               <a
                 href={`tel:${phoneTel}`}
-                className="flex items-center gap-2 text-sm font-medium text-gray-700 hover:text-[#2E7D32] no-underline"
-                aria-label="Call Autism ABA Partners"
+                className="flex items-center gap-2 text-sm font-medium text-gray-700 hover:text-[#2E7D32]"
               >
                 <FaPhoneAlt className="w-4 h-4 text-[#2E7D32]" />
                 <span className="text-xs">{phoneRaw}</span>
               </a>
               <a
                 href={`mailto:${emailRaw}`}
-                className="flex items-center gap-2 text-sm font-medium text-gray-700 hover:text-[#2E7D32] no-underline mt-0.5"
-                aria-label="Email Autism ABA Partners"
+                className="flex items-center gap-2 text-sm font-medium text-gray-700 hover:text-[#2E7D32] mt-0.5"
               >
                 <FaEnvelopeOpenText className="w-4 h-4 text-[#F57C00]" />
                 <span className="text-xs">{emailRaw}</span>
@@ -109,7 +96,7 @@ export default function MainNavbar() {
             </div>
           </div>
 
-          {/* Desktop Navigation */}
+          {/* Desktop Nav */}
           <ul className="hidden lg:flex items-center gap-1 xl:gap-2">
             <li>
               <NavLink to="/" className={navLinkClasses}>
@@ -143,28 +130,19 @@ export default function MainNavbar() {
             </li>
           </ul>
 
-          {/* Contact CTA Button - Enhanced */}
+          {/* Contact Button */}
           <NavLink
             to="/contact-us"
             className="hidden lg:inline-flex items-center gap-2 bg-gradient-to-r from-[#F57C00] to-[#FF8A33] text-white px-6 py-2.5 rounded-full font-semibold shadow-md hover:shadow-xl hover:from-[#2E7D32] hover:to-[#388E3C] transform hover:scale-105 transition-all duration-300"
           >
-            <span>Contact Us</span>
-            <svg
-              className="w-4 h-4 transform group-hover:translate-x-1 transition-transform"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-            </svg>
+            Contact Us
           </NavLink>
 
-          {/* Mobile Menu Button - Enhanced */}
+          {/* Mobile Menu Icon */}
           <button
-            className="lg:hidden relative w-10 h-10 flex items-center justify-center rounded-lg  hover:bg-gray-100 transition-colors duration-300"
-            onClick={() => setMenuOpen((prev) => !prev)}
+            className="lg:hidden w-10 h-10 flex items-center justify-center rounded-lg hover:bg-gray-100 transition"
+            onClick={() => setMenuOpen(!menuOpen)}
             aria-label="Toggle Menu"
-            aria-expanded={menuOpen}
           >
             <div className="relative w-6 h-5">
               <span className={`absolute w-6 h-0.5 bg-gray-700 transition-all duration-300 ${menuOpen ? "top-2 rotate-45" : "top-0"}`}></span>
@@ -181,17 +159,16 @@ export default function MainNavbar() {
           <div
             className="fixed inset-0 bg-black/50 backdrop-blur-sm lg:hidden"
             onClick={() => setMenuOpen(false)}
-            aria-hidden="true"
           ></div>
 
           <div className="fixed top-0 right-0 h-full w-full sm:w-80 bg-white shadow-2xl lg:hidden animate-slideIn">
+            
             <div className="flex flex-col h-full">
               <div className="flex items-center justify-between p-6 border-b border-gray-200">
                 <h2 className="text-xl font-bold text-gray-800">Menu</h2>
                 <button
                   onClick={() => setMenuOpen(false)}
-                  className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 transition-colors"
-                  aria-label="Close menu"
+                  className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 transition"
                 >
                   <FaTimes className="text-gray-700 text-xl" />
                 </button>
@@ -217,7 +194,7 @@ export default function MainNavbar() {
                       }
                       onClick={() => setMenuOpen(false)}
                     >
-                      <span>{item.label}</span>
+                      {item.label}
                       <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                       </svg>
@@ -226,16 +203,14 @@ export default function MainNavbar() {
                 ))}
               </ul>
 
+              {/* Contact button in mobile menu */}
               <div className="p-6 border-t border-gray-200">
                 <NavLink
                   to="/contact-us"
-                  className="flex items-center justify-center gap-2 w-full bg-gradient-to-r from-[#F57C00] to-[#FF8A33] text-white py-3 rounded-lg font-semibold shadow-lg hover:shadow-xl hover:from-[#2E7D32] hover:to-[#388E3C] transform hover:scale-105 transition-all duration-300"
+                  className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-[#F57C00] to-[#FF8A33] text-white py-3 rounded-lg font-semibold shadow-lg"
                   onClick={() => setMenuOpen(false)}
                 >
-                  <span>Contact Us</span>
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                  </svg>
+                  Contact Us
                 </NavLink>
               </div>
             </div>

@@ -8,26 +8,17 @@ import {
   FaInstagram,
   FaTwitter,
 } from "react-icons/fa";
-import { SiTiktok } from "react-icons/si"; // reliable TikTok icon
-// If you want the new "X" logo later, you can import FaXTwitter from "react-icons/fa6"
+import { SiTiktok } from "react-icons/si";
 
 import { useSettings } from "../context/SettingsContext";
+import autismLogo from "../assets/autism-logo.webp";
 
 export default function Footer() {
   const { settings } = useSettings();
   if (!settings) return null;
 
-  // backend base (used to prefix local uploads)
-  const backend = import.meta.env.VITE_BACKEND_URL || "";
+  const logoUrl = autismLogo;
 
-  // logo handling (if stored as relative path on backend)
-  const logoUrl = settings.logo
-    ? settings.logo.startsWith("http")
-      ? settings.logo
-      : `${backend}${settings.logo}`
-    : "/fallback-logo.png";
-
-  // robust social lookups: handle keys like twitter or x
   const facebookUrl = settings.facebook || settings.fb || "";
   const instagramUrl = settings.instagram || settings.ig || "";
   const twitterUrl = settings.twitter || settings.x || settings.x_url || "";
@@ -36,8 +27,8 @@ export default function Footer() {
   return (
     <footer className="bg-gradient-to-b from-[#07251f] to-[#0f2b23] text-gray-100 pt-12 pb-8">
       <div className="max-w-7xl mx-auto px-6">
-
-        {/* Top grid */}
+        
+        {/* Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 items-start pb-10">
 
           {/* Column 1 - Logo */}
@@ -51,27 +42,28 @@ export default function Footer() {
                 />
               </div>
             </div>
+
             <p className="text-gray-300 text-sm leading-relaxed mt-4">
               Empowering children through evidence-based ABA therapy and family support.
             </p>
           </div>
 
-          {/* Column 2 - Quick Links */}
+          {/* Column 2 */}
           <div className="px-2 md:px-6">
             <h4 className="text-lg font-semibold text-white mb-3 relative inline-block after:block after:w-12 after:h-1 after:bg-orange-400 after:rounded-sm after:mt-3">
               Quick Links
             </h4>
             <ul className="mt-4 space-y-3 text-gray-300 text-sm">
-              <li><a href="/" className="block hover:text-white hover:pl-2 transition-all">Home</a></li>
-              <li><a href="/about-us" className="block hover:text-white hover:pl-2 transition-all">About Us</a></li>
-              <li><a href="/services" className="block hover:text-white hover:pl-2 transition-all">Services</a></li>
-              <li><a href="/contact-us" className="block hover:text-white hover:pl-2 transition-all">Contact</a></li>
-              <li><a href="/faq" className="block hover:text-white hover:pl-2 transition-all">FAQs</a></li>
-              <li><a href="/careers" className="block hover:text-white hover:pl-2 transition-all">Careers</a></li>
+              <li><a href="/" className="hover:text-white hover:pl-2 transition-all block">Home</a></li>
+              <li><a href="/about-us" className="hover:text-white hover:pl-2 transition-all block">About Us</a></li>
+              <li><a href="/services" className="hover:text-white hover:pl-2 transition-all block">Services</a></li>
+              <li><a href="/contact-us" className="hover:text-white hover:pl-2 transition-all block">Contact</a></li>
+              <li><a href="/faq" className="hover:text-white hover:pl-2 transition-all block">FAQs</a></li>
+              <li><a href="/careers" className="hover:text-white hover:pl-2 transition-all block">Careers</a></li>
             </ul>
           </div>
 
-          {/* Column 3 - Get in Touch */}
+          {/* Column 3 */}
           <address className="not-italic px-2 md:px-6">
             <h4 className="text-lg font-semibold text-white mb-3 relative inline-block after:block after:w-12 after:h-1 after:bg-orange-400 after:rounded-sm after:mt-3">
               Get in Touch
@@ -85,21 +77,21 @@ export default function Footer() {
 
               <li className="flex items-center gap-3">
                 <FaPhoneAlt className="text-orange-400" />
-                <a href={`tel:${settings.phone || ""}`} className="hover:text-white transition-colors">
+                <a href={`tel:${settings.phone || ""}`} className="hover:text-white">
                   {settings.phone || "N/A"}
                 </a>
               </li>
 
               <li className="flex items-center gap-3">
                 <FaEnvelope className="text-orange-400" />
-                <a href={`mailto:${settings.email || ""}`} className="hover:text-white transition-colors">
+                <a href={`mailto:${settings.email || ""}`} className="hover:text-white">
                   {settings.email || "N/A"}
                 </a>
               </li>
             </ul>
           </address>
 
-          {/* Column 4 - Social */}
+          {/* Column 4 */}
           <div className="px-2 md:px-6">
             <h4 className="text-lg font-semibold text-white mb-3 relative inline-block after:block after:w-12 after:h-1 after:bg-orange-400 after:rounded-sm after:mt-3">
               Follow Us
@@ -111,71 +103,44 @@ export default function Footer() {
 
             <div className="flex items-center gap-3">
               {facebookUrl && (
-                <a
-                  href={facebookUrl}
-                  aria-label="Facebook"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-2 rounded-lg bg-white/5 hover:bg-white/10 shadow-sm"
-                >
+                <a href={facebookUrl} target="_blank" rel="noopener" className="p-2 bg-white/5 rounded-lg hover:bg-white/10">
                   <FaFacebookF />
                 </a>
               )}
 
               {instagramUrl && (
-                <a
-                  href={instagramUrl}
-                  aria-label="Instagram"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-2 rounded-lg bg-white/5 hover:bg-white/10 shadow-sm"
-                >
+                <a href={instagramUrl} target="_blank" rel="noopener" className="p-2 bg-white/5 rounded-lg hover:bg-white/10">
                   <FaInstagram />
                 </a>
               )}
 
               {twitterUrl && (
-                <a
-                  href={twitterUrl}
-                  aria-label="Twitter / X"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-2 rounded-lg bg-white/5 hover:bg-white/10 shadow-sm"
-                >
+                <a href={twitterUrl} target="_blank" rel="noopener" className="p-2 bg-white/5 rounded-lg hover:bg-white/10">
                   <FaTwitter />
                 </a>
               )}
 
               {tiktokUrl && (
-                <a
-                  href={tiktokUrl}
-                  aria-label="TikTok"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-2 rounded-lg bg-white/5 hover:bg-white/10 shadow-sm"
-                >
+                <a href={tiktokUrl} target="_blank" rel="noopener" className="p-2 bg-white/5 rounded-lg hover:bg-white/10">
                   <SiTiktok />
                 </a>
               )}
             </div>
           </div>
+
         </div>
 
-        {/* Bottom bar */}
+        {/* Bottom */}
         <div className="border-t border-white/10 mt-8 pt-6 flex flex-col md:flex-row items-center justify-center gap-3 text-sm text-gray-400">
           <div>© {new Date().getFullYear()} Autism ABA Partners. All Rights Reserved.</div>
           <div>
             Developed by{" "}
-            <a
-              href="https://www.webieapp.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-blue-400 hover:text-blue-300"
-            >
+            <a href="https://www.webieapp.com" className="text-blue-400 hover:text-blue-300" target="_blank" rel="noopener">
               WebieApp
             </a>
           </div>
         </div>
+
       </div>
     </footer>
   );
