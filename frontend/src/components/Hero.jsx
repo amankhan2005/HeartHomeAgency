@@ -12,14 +12,17 @@ export default function Hero() {
     { full: banner3 },
   ]);
 
+  /* ---------- BLUE + WHITE CONTENT ---------- */
   const [heroText, setHeroText] = useState({
-    heading: "Autism Support & Therapy",
-    highlight: "Caring, Evidence-Based",
-    subheading: "Personalized therapy, parent training, and school support.",
-    highlightColor: "#F57C00",
+    heading: "DECODER Health",
+    highlight: "Empowering Every Child’s Future",
+    subheading:
+      "We lead with applied behavior analysis, social innovation, and culturally sensitive care to create meaningful, lasting outcomes for children and families.",
+    highlightColor: "#1E88E5", // blue
     textColor: "#FFFFFF",
     buttonBg: "#FFFFFF",
-    buttonTextColor: "#2E7D32",
+    buttonTextColor: "#1E88E5",
+    secondaryBorder: "#FFFFFF",
   });
 
   const [index, setIndex] = useState(0);
@@ -27,9 +30,7 @@ export default function Hero() {
   const isHoveredRef = useRef(false);
   const AUTOPLAY_MS = 5000;
 
-  /* ------------------------------------------------
-      FETCH DYNAMIC SLIDER + TEXT FROM BACKEND
-  ------------------------------------------------- */
+  /* ---------------- FETCH FROM BACKEND ---------------- */
   useEffect(() => {
     const backend = import.meta.env.VITE_BACKEND_URL;
 
@@ -46,7 +47,7 @@ export default function Hero() {
       .catch(() => {});
   }, []);
 
-  /* Autoplay */
+  /* ---------------- AUTOPLAY ---------------- */
   useEffect(() => {
     startAutoplay();
     return stopAutoplay;
@@ -83,7 +84,7 @@ export default function Hero() {
   return (
     <header
       id="home"
-      className="relative w-full h-screen overflow-hidden"
+      className="relative w-full h-auto lg:h-[70vh] overflow-hidden"
       onMouseEnter={() => (isHoveredRef.current = true)}
       onMouseLeave={() => (isHoveredRef.current = false)}
     >
@@ -92,86 +93,95 @@ export default function Hero() {
         {images.map((img, i) => (
           <div
             key={i}
-            className={`absolute inset-0 transition-all duration-700 ${
-              index === i ? "opacity-100 z-10" : "opacity-0 z-0 pointer-events-none"
+            className={`absolute inset-0 transition-opacity duration-700 ${
+              index === i
+                ? "opacity-100 z-10"
+                : "opacity-0 z-0 pointer-events-none"
             }`}
           >
-            <img src={img.full} className="w-full h-full object-cover" />
-            <div className="absolute inset-0 bg-black/30" />
+            <img
+              src={img.full}
+              alt="DECODER Health Banner"
+              className="w-full h-full object-cover"
+            />
+
+            {/* Blue overlay */}
+            <div className="absolute inset-0 bg-blue-900/50" />
           </div>
         ))}
       </div>
 
-      {/* Dynamic Content */}
+      {/* Content */}
       <div
         className="relative z-20 flex flex-col items-center justify-center h-full text-center px-6"
         style={{ color: heroText.textColor }}
       >
         <div className="max-w-4xl">
-
-          {/* Heading */}
-          <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold leading-tight mb-4">
+          <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold leading-tight mb-5">
             {heroText.heading} <br />
             <span style={{ color: heroText.highlightColor }}>
               {heroText.highlight}
             </span>
           </h1>
 
-          {/* Subheading */}
-          <p className="text-lg sm:text-xl md:text-2xl max-w-3xl mx-auto mb-8">
+          <p className="text-lg sm:text-xl md:text-2xl max-w-3xl mx-auto mb-10 text-white/90">
             {heroText.subheading}
           </p>
 
-          {/* Buttons */}
-          <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mb-8">
-            
+          <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
+            {/* Primary Button */}
             <a
               href="/contact-us"
-              className="group inline-flex items-center gap-3 px-8 py-4 border-2 rounded-full text-lg font-semibold transition-all duration-200 transform hover:scale-105"
-              style={{
-                borderColor: heroText.textColor,
-                color: heroText.textColor,
-                backgroundColor: "transparent",
-              }}
-            >
-              Book Free Consultation <FaChevronRight className="w-5 h-5" />
-            </a>
-
-            <a
-              href="/services"
-              className="group inline-flex items-center gap-3 px-8 py-4 rounded-full text-lg font-semibold transition-all duration-200 transform hover:scale-105"
+              className="inline-flex items-center gap-3 px-8 py-4 rounded-full text-lg font-semibold transition-all duration-200 hover:scale-105"
               style={{
                 backgroundColor: heroText.buttonBg,
                 color: heroText.buttonTextColor,
               }}
             >
-              Explore Services <FaChevronRight className="w-5 h-5" />
+              Book Free Consultation <FaChevronRight />
             </a>
 
+            {/* Secondary Button */}
+            <a
+              href="/services"
+              className="inline-flex items-center gap-3 px-8 py-4 border-2 rounded-full text-lg font-semibold transition-all duration-200 hover:scale-105"
+              style={{
+                borderColor: heroText.secondaryBorder,
+                color: heroText.textColor,
+              }}
+            >
+              Explore Services <FaChevronRight />
+            </a>
           </div>
         </div>
       </div>
 
-      {/* Controls */}
+      {/* Arrows */}
       <div className="absolute inset-x-0 top-1/2 z-30 flex items-center justify-between px-4">
-        <button className="rounded-full p-3 bg-black/30 text-white" onClick={prev}>
+        <button
+          className="rounded-full p-3 bg-white/20 text-white hover:bg-white/30 transition"
+          onClick={prev}
+        >
           <FaChevronLeft />
         </button>
-        <button className="rounded-full p-3 bg-black/30 text-white" onClick={next}>
+        <button
+          className="rounded-full p-3 bg-white/20 text-white hover:bg-white/30 transition"
+          onClick={next}
+        >
           <FaChevronRight />
         </button>
       </div>
 
       {/* Dots */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-30 flex gap-3">
+      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-30 flex gap-3">
         {images.map((_, i) => (
           <button
             key={i}
             onClick={() => goTo(i)}
-            className={`w-3 h-3 rounded-full ${
-              i === index ? "bg-white" : "bg-white/40"
+            className={`w-3 h-3 rounded-full transition ${
+              i === index ? "bg-white" : "bg-white/50"
             }`}
-          ></button>
+          />
         ))}
       </div>
     </header>
