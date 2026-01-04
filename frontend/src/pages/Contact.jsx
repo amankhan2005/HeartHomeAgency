@@ -6,7 +6,7 @@ export default function ContactUs() {
   const { settings } = useSettings();
 
   const CONTACT_EMAIL = settings?.email || "info@decoderhealth.com";
-  const CONTACT_PHONE = settings?.phone || "+1 (571) 530-9004";
+  const CONTACT_PHONE = settings?.phone || "(571) 606-3898";
   const CONTACT_ADDRESS = settings?.address || "Aldie, Virginia";
 
   const MAP_LINK =

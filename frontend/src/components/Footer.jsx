@@ -23,7 +23,7 @@ export default function Footer() {
 
   // -------- DEFAULT VALUES --------
   const defaultEmail = "info@decoderhealth.com";
-  const defaultPhone = "+1 (571) 530-9004";
+  const defaultPhone = "(571) 606-3898";
   const defaultAddress = "Aldie, Virginia";
   const defaultAddressLink = "https://maps.app.goo.gl/f7tX5prHV9WJkJMRA";
 

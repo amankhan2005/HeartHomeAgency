@@ -4,6 +4,7 @@ import { Heart } from "lucide-react";
 import amirImg from "../assets/team/amir.png";
 import aadhyaImg from "../assets/team/aadhya.png";
 import zaynahImg from "../assets/team/zaynah.png";
+import annieImg from "../assets/team/annie.avif";
 
 export default function TeamPage() {
   return (
@@ -32,7 +33,7 @@ export default function TeamPage() {
 
       {/* ================= TEAM ================= */}
       <section className="py-20 lg:py-24">
-        <div className="max-w-7xl mx-auto px-6 space-y-24 lg:space-y-28">
+        <div className="max-w-7xl mx-auto px-6">
 
           {/* ========== MEMBER 1 ========= */}
           <div className="grid lg:grid-cols-2 gap-12 items-center text-center lg:text-left">
@@ -65,9 +66,10 @@ export default function TeamPage() {
             </div>
           </div>
 
-          {/* ========== MEMBER 2 (FIXED) ========= */}
+          <hr className="my-24 border-t border-gray-200" />
+
+          {/* ========== MEMBER 2 ========= */}
           <div className="grid lg:grid-cols-2 gap-12 items-center text-center lg:text-left">
-            {/* IMAGE ALWAYS FIRST */}
             <img
               src={aadhyaImg}
               alt="Aadhya Mysore"
@@ -97,6 +99,8 @@ export default function TeamPage() {
             </div>
           </div>
 
+          <hr className="my-24 border-t border-gray-200" />
+
           {/* ========== MEMBER 3 ========= */}
           <div className="grid lg:grid-cols-2 gap-12 items-center text-center lg:text-left">
             <img
@@ -123,6 +127,48 @@ export default function TeamPage() {
                 She is excited to expand access to ABA services throughout
                 Northern Virginia—helping families create meaningful progress
                 in their child’s journey.
+              </p>
+            </div>
+          </div>
+
+          <hr className="my-24 border-t border-gray-200" />
+
+          {/* ========== MEMBER 4 ========= */}
+          <div className="grid lg:grid-cols-2 gap-12 items-center text-center lg:text-left">
+            <img
+              src={annieImg}
+              alt="Dr. Annie Lasway"
+              className="rounded-xl shadow-lg w-full max-w-xs lg:max-w-sm mx-auto"
+            />
+
+            <div>
+              <h2 className="text-3xl font-bold text-[#0B5ED7]">
+                Dr. Annie Lasway
+              </h2>
+
+              <p className="text-sm text-gray-500 mb-4">
+                PhD, MPH, PMP · Founder & Public Health Researcher
+              </p>
+
+              <div className="w-20 h-[2px] bg-[#0B5ED7] mb-6 mx-auto lg:mx-0" />
+
+              <p className="text-gray-700 leading-7">
+                Dr. Annie Lasway is a healthcare researcher, educator, and founder
+                whose work centers on advancing evidence-based, culturally
+                responsive approaches to autism and neurodevelopmental care.
+                <br /><br />
+                With a PhD in Public Health, an MPH, and PMP certification, she
+                brings scientific rigor, program design expertise, and leadership
+                to improving early identification and equitable access to autism
+                services.
+                <br /><br />
+                She serves as an adjunct professor at George Mason University and
+                Muhimbili University, contributing to curriculum development,
+                applied research training, and cross-cultural program evaluation.
+                <br /><br />
+                Her work emphasizes compassion, cultural competence, and global
+                collaboration in support of neurodivergent individuals and the
+                families and professionals who support them.
               </p>
             </div>
           </div>

@@ -18,7 +18,7 @@ export default function AboutPreview() {
           {/* LEFT CONTENT */}
           <div className="text-center lg:text-left">
             <span className="inline-block mb-5 text-xs sm:text-sm font-semibold text-[#0B5ED7] tracking-widest uppercase">
-              Compassionate ABA Care
+              Compassionate Applied Behavior Analysis (ABA) Care for Autism
             </span>
 
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-[#0A2540] leading-tight">
@@ -29,9 +29,10 @@ export default function AboutPreview() {
             </h1>
 
             <p className="mt-6 sm:mt-8 text-base sm:text-lg lg:text-xl text-gray-600 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
-              We provide personalized, culturally competent ABA therapy
-              designed to support growth, confidence, and meaningful
-              progress for every child and family.
+              We provide personalized, culturally competent Applied Behavior
+              Analysis (ABA) therapy designed to support children with autism,
+              helping build growth, confidence, and meaningful progress for
+              every child and family.
             </p>
 
             <div className="mt-10 sm:mt-12 flex flex-col sm:flex-row gap-4 sm:gap-5 justify-center lg:justify-start">
@@ -58,7 +59,7 @@ export default function AboutPreview() {
             <div className="relative bg-white/70 backdrop-blur-xl rounded-[32px] shadow-2xl p-4">
               <img
                 src={aboutImg}
-                alt="ABA therapist smiling in clinic"
+                alt="Applied Behavior Analysis (ABA) therapy for children with autism"
                 className="
                   rounded-[28px]
                   object-cover

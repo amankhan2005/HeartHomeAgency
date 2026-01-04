@@ -16,7 +16,7 @@ export default function TopNavbar() {
   const { settings } = useSettings();
 
   const address = settings?.address || "Aldie, Virginia";
-  const phone = settings?.phone || "+1 (571) 530-9004";
+  const phone = settings?.phone || "(571) 606-3898";
   const email = settings?.email || "info@decoderhealth.com";
 
   const facebook = settings?.facebook || "";

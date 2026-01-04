@@ -5,6 +5,7 @@ import { FaUserMd } from "react-icons/fa";
 import amir from "../assets/team/amir.png";
 import aadhya from "../assets/team/aadhya.png";
 import zaynah from "../assets/team/zaynah.png";
+import annie from "../assets/team/annie.avif";
 
 export default function TeamSection() {
   const team = [
@@ -23,62 +24,65 @@ export default function TeamSection() {
       role: "Strategic Engagement Specialist",
       img: zaynah,
     },
+    {
+      name: "Dr. Annie Lasway ",
+      role: "Founder & Public Health Researcher",
+      img: annie,
+    },
   ];
 
   return (
-    <section className="w-full bg-gradient-to-b from-[#0B5ED7] to-[#083B9A] py-28 sm:py-20">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="w-full bg-gradient-to-b from-[#0B5ED7] to-[#083B9A] py-28">
+      <div className="max-w-7xl mx-auto px-6">
 
-        {/* ===== HEADING ===== */}
-        <div className="text-center px-6 mb-20">
-          <h2 className="text-5xl md:text-6xl font-extrabold text-white drop-shadow-lg">
+        {/* HEADING */}
+        <div className="text-center mb-20">
+          <h2 className="text-5xl font-extrabold text-white">
             Our Dedicated Team
           </h2>
-
-          <div className="h-2 w-24 mx-auto bg-white rounded-full mt-4"></div>
-
-          <p className="text-white/90 mt-6 max-w-3xl mx-auto text-xl leading-relaxed">
-            Meet the professionals delivering compassionate, culturally responsive,
-            and evidence-based ABA care.
-          </p>
+          <div className="h-2 w-24 mx-auto bg-white rounded-full mt-4" />
         </div>
 
-        {/* ===== TEAM CARDS ===== */}
-        <div className="grid gap-10 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 place-items-center">
+        {/* GRID */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
           {team.map((member, i) => (
             <div
               key={i}
-              className="bg-white rounded-3xl shadow-2xl overflow-hidden w-full max-w-sm transition-transform duration-300 hover:-translate-y-2"
+              className="bg-white rounded-3xl shadow-2xl
+                         flex flex-col items-center
+                         pt-8 pb-10 px-6
+                         transition hover:-translate-y-2"
             >
               {/* IMAGE */}
-              <div className="h-64 w-full bg-[#F5F9FF] flex items-center justify-center">
+              <div className="h-56 w-full bg-[#F5F9FF] rounded-2xl
+                              flex items-center justify-center">
                 <img
                   src={member.img}
-                  className="w-full h-full object-contain p-6"
                   alt={member.name}
+                  className="h-full object-contain p-6"
                 />
               </div>
 
-              {/* FLOATING ICON + INFO */}
-              <div className="relative -mt-12 px-4 pb-8">
-
-                {/* Floating Icon */}
-                <div className="flex justify-center mb-4">
-                  <div className="w-14 h-14 bg-[#0B5ED7] text-white rounded-full flex items-center justify-center shadow-xl border-4 border-white">
-                    <FaUserMd className="text-xl" />
-                  </div>
+              {/* ICON (CLOSE TO IMAGE) */}
+              <div className="-mt-7 mb-4">
+                <div className="w-14 h-14 bg-[#0B5ED7] text-white rounded-full
+                                flex items-center justify-center
+                                shadow-lg border-4 border-white">
+                  <FaUserMd />
                 </div>
+              </div>
 
-                {/* Info Box */}
-                <div className="text-center bg-white rounded-2xl px-6 py-4 shadow-lg">
-                  <h3 className="text-lg font-bold text-[#0A2540]">
-                    {member.name}
-                  </h3>
-                  <p className="text-sm text-[#425466] font-medium mt-1">
-                    {member.role}
-                  </p>
-                </div>
+              {/* NAME + ROLE (NO EXTRA GAP) */}
+              <div className="text-center">
+                <h3 className="text-lg font-bold text-[#0A2540] leading-tight
+                               min-h-[48px] line-clamp-2">
+                  {member.name}
+                </h3>
 
+                <p className="text-sm text-[#425466] mt-1
+                              min-h-[40px] line-clamp-2">
+                  {member.role}
+                </p>
               </div>
             </div>
           ))}
