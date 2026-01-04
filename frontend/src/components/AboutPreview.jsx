@@ -7,7 +7,6 @@ import aboutImg from "../assets/about/about-preview.avif";
 export default function AboutPreview() {
   return (
     <section className="relative overflow-hidden bg-gradient-to-br from-[#F5F9FF] via-white to-[#EEF4FF]">
-
       {/* Soft background glow */}
       <div className="absolute -top-40 -left-40 w-[500px] h-[500px] bg-[#0B5ED7]/10 rounded-full blur-[120px]" />
       <div className="absolute top-1/2 -right-40 w-[500px] h-[500px] bg-[#0B5ED7]/10 rounded-full blur-[120px]" />
@@ -18,21 +17,22 @@ export default function AboutPreview() {
           {/* LEFT CONTENT */}
           <div className="text-center lg:text-left">
             <span className="inline-block mb-5 text-xs sm:text-sm font-semibold text-[#0B5ED7] tracking-widest uppercase">
-              Compassionate Applied Behavior Analysis (ABA) Care for Autism
+              Applied Behavior Analysis (ABA) Therapy for Autism
             </span>
 
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-[#0A2540] leading-tight">
               Understanding your child’s needs through{" "}
               <span className="text-[#0B5ED7]">
-                evidence-based behavioral analysis
+                evidence-based Applied Behavior Analysis
               </span>
             </h1>
 
             <p className="mt-6 sm:mt-8 text-base sm:text-lg lg:text-xl text-gray-600 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
-              We provide personalized, culturally competent Applied Behavior
-              Analysis (ABA) therapy designed to support children with autism,
-              helping build growth, confidence, and meaningful progress for
-              every child and family.
+              We provide personalized, culturally responsive{" "}
+              <strong>Applied Behavior Analysis (ABA) therapy</strong> to support
+              children with <strong>autism spectrum disorder (ASD)</strong>.
+              Our approach focuses on building communication, independence,
+              confidence, and meaningful progress for every child and family.
             </p>
 
             <div className="mt-10 sm:mt-12 flex flex-col sm:flex-row gap-4 sm:gap-5 justify-center lg:justify-start">
@@ -60,12 +60,7 @@ export default function AboutPreview() {
               <img
                 src={aboutImg}
                 alt="Applied Behavior Analysis (ABA) therapy for children with autism"
-                className="
-                  rounded-[28px]
-                  object-cover
-                  w-full max-w-sm sm:max-w-md
-                  lg:max-w-xl
-                "
+                className="rounded-[28px] object-cover w-full max-w-sm sm:max-w-md lg:max-w-xl"
               />
             </div>
           </div>
