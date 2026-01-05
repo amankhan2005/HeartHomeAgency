@@ -1,258 +1,197 @@
- // src/components/MainNavbar.jsx
-import React, { useState, useEffect } from "react";
+ import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
-import { FaTimes, FaChevronDown } from "react-icons/fa";
-import autismLogo from "../assets/svgviewer-output.svg";
+import { FaChevronDown, FaTimes } from "react-icons/fa";
+import { motion, AnimatePresence } from "framer-motion";
+import logo from "../assets/logo.jpeg";
 
 export default function MainNavbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(null);
-  const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    const onScroll = () => setScrolled(window.scrollY > 40);
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   useEffect(() => {
-    document.body.style.overflow = menuOpen ? "hidden" : "unset";
+    document.body.style.overflow = menuOpen ? "hidden" : "auto";
   }, [menuOpen]);
 
-  const navLinkClasses = ({ isActive }) =>
-    `relative px-4 py-2.5 text-[16px] font-medium transition-all duration-200 ${
-      isActive
-        ? "text-[#0B5ED7]"
-        : "text-gray-700 hover:text-[#0B5ED7]"
-    }`;
+  const linkClass = ({ isActive }) =>
+    `relative px-5 py-4 text-[15px] font-semibold transition
+     ${isActive ? "text-white" : "text-white/80 hover:text-white"}
+     after:absolute after:left-5 after:-bottom-1 after:h-[2px]
+     after:bg-white after:transition-all after:duration-300
+     ${isActive ? "after:w-6" : "after:w-0 hover:after:w-6"}`;
 
   return (
-    <nav
-      className={`bg-white sticky top-0 z-50 transition-all duration-300 ${
-        scrolled ? "shadow-md py-3" : "shadow-sm py-5"
-      }`}
-    >
-      <div className="max-w-7xl mx-auto px-4">
-        <div className="flex items-center justify-between">
+    <>
+      {/* ================= NAVBAR ================= */}
+      <motion.nav
+        initial={{ y: -18, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.45 }}
+        className={`w-full z-50 ${scrolled ? "fixed top-0" : "relative"}`}
+      >
+        <div
+          className={`w-full backdrop-blur-xl bg-[#AF3059]/95
+          border-b border-white/20 shadow-[0_10px_40px_rgba(175,48,89,0.35)]
+          transition-all ${scrolled ? "py-3" : "py-5"}`}
+        >
+          <div className="max-w-7xl mx-auto px-6">
+            <div className="flex items-center justify-between">
 
-          {/* LOGO */}
-          <NavLink to="/" className="flex items-center hover:scale-105 transition">
-            <img
-              src={autismLogo}
-              alt="Decoder Health"
-              className={`object-contain transition-all duration-300 ${
-                scrolled ? "h-16" : "h-20"
-              }`}
-            />
-          </NavLink>
+              {/* LOGO */}
+              <NavLink to="/" className="flex items-center gap-3">
+                <img
+                  src={logo}
+                  alt="Gentle Hearts Home Health Care Agency"
+                  className="h-20 w-auto rounded-xl"
+                />
+              </NavLink>
 
-          {/* ================= DESKTOP MENU ================= */}
-          <ul className="hidden lg:flex items-center gap-1">
-            <li><NavLink to="/" className={navLinkClasses}>Home</NavLink></li>
-            <li><NavLink to="/about-us" className={navLinkClasses}>About Us</NavLink></li>
+              {/* DESKTOP NAV */}
+              <ul className="hidden lg:flex items-center gap-1">
+                <li><NavLink to="/" className={linkClass}>Home</NavLink></li>
+                <li><NavLink to="/about-us" className={linkClass}>About Us</NavLink></li>
+                <li><NavLink to="/our-story" className={linkClass}>Our Story</NavLink></li>
 
-            {/* SERVICES DROPDOWN */}
-            <li
-              className="relative"
-              onMouseEnter={() => setOpenDropdown("services")}
-              onMouseLeave={() => setOpenDropdown(null)}
-            >
-              <div className="flex items-center gap-1 px-4 py-2.5 cursor-pointer text-[16px] font-medium text-gray-700 hover:text-[#0B5ED7]">
-                Services <FaChevronDown className="text-xs mt-[1px]" />
-              </div>
-
-              <div
-                className={`absolute left-0 mt-3 w-72 rounded-xl bg-white border border-gray-100 shadow-xl transition-all duration-200 ${
-                  openDropdown === "services"
-                    ? "opacity-100 translate-y-0 visible"
-                    : "opacity-0 -translate-y-2 invisible"
-                }`}
-              >
-                {[
-                  ["Culturally Competent Care", "/services/culturally-responsive-care"],
-                  ["Grace & Respect", "/services/compassion-respect"],
-                  ["Evidence-Based Practice", "/services/evidence-based-aba"],
-                  ["Speed & Agility", "/services/flexible-support"],
-                ].map(([label, to]) => (
-                  <NavLink
-                    key={to}
-                    to={to}
-                    className="block px-5 py-3 text-sm text-gray-700 hover:bg-[#0B5ED7]/10 hover:text-[#0B5ED7]"
-                  >
-                    {label}
-                  </NavLink>
-                ))}
-              </div>
-            </li>
-
-            <li><NavLink to="/faq" className={navLinkClasses}>FAQs</NavLink></li>
-            <li><NavLink to="/careers" className={navLinkClasses}>Careers</NavLink></li>
-            <li><NavLink to="/team" className={navLinkClasses}>Team</NavLink></li>
-
-            {/* MORE DROPDOWN */}
-            <li
-              className="relative"
-              onMouseEnter={() => setOpenDropdown("more")}
-              onMouseLeave={() => setOpenDropdown(null)}
-            >
-              <div className="flex items-center gap-1 px-4 py-2.5 cursor-pointer text-[16px] font-medium text-gray-700 hover:text-[#0B5ED7]">
-                More <FaChevronDown className="text-xs mt-[1px]" />
-              </div>
-
-              <div
-                className={`absolute right-0 mt-3 w-72 rounded-xl bg-white border border-gray-100 shadow-xl transition-all duration-200 ${
-                  openDropdown === "more"
-                    ? "opacity-100 translate-y-0 visible"
-                    : "opacity-0 -translate-y-2 invisible"
-                }`}
-              >
-                <NavLink to="/message-from-ceo" className="block px-5 py-3 text-sm text-gray-700 hover:bg-[#0B5ED7]/10 hover:text-[#0B5ED7]">
-                  Message From CEO
-                </NavLink>
-
-                <NavLink to="/autism-is-cool" className="block px-5 py-3 text-sm text-gray-700 hover:bg-[#0B5ED7]/10 hover:text-[#0B5ED7]">
-                  Autism is Cool
-                </NavLink>
-
-                {/* ✅ EXTERNAL LINKS */}
-                <a
-                  href="https://www.youtube.com/@DecoderHealth"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block px-5 py-3 text-sm text-gray-700 hover:bg-[#0B5ED7]/10 hover:text-[#0B5ED7]"
+                {/* SERVICES DROPDOWN */}
+                <li
+                  className="relative"
+                  onMouseEnter={() => setOpenDropdown("services")}
+                  onMouseLeave={() => setOpenDropdown(null)}
                 >
-                  Youtube Channel
-                </a>
+                  <div className="flex items-center gap-1 px-5 py-4 cursor-pointer font-semibold text-white/80 hover:text-white">
+                    Services <FaChevronDown className="text-xs mt-[1px]" />
+                  </div>
 
-                <a
-                  href="https://www.nimh.nih.gov/health/statistics/autism-spectrum-disorder-asd"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block px-5 py-3 text-sm text-gray-700 hover:bg-[#0B5ED7]/10 hover:text-[#0B5ED7]"
+                  <AnimatePresence>
+                    {openDropdown === "services" && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 10 }}
+                        transition={{ duration: 0.25 }}
+                        className="absolute left-0 mt-4 w-[420px] rounded-2xl
+                        bg-white/95 backdrop-blur-xl border border-gray-200
+                        shadow-[0_25px_60px_rgba(0,0,0,0.15)] overflow-hidden"
+                      >
+                        {[
+                          ["Stroke Recovery & Neuro-Rehabilitation", "/services/stroke-recovery-neuro-rehab"],
+                          ["Dementia & Alzheimer’s Care", "/services/dementia-alzheimers-care"],
+                          ["Post-Surgical Recovery", "/services/post-surgical-recovery"],
+                          ["Comprehensive Care Coordination", "/services/comprehensive-care-coordination"],
+                          ["Concierge & White-Glove Add-Ons", "/services/concierge-add-ons"],
+                          ["Private-Pay Model", "/services/private-pay-model"],
+                          ["Physician & Hospital Partnerships", "/services/physician-hospital-partnerships"],
+                        ].map(([label, to]) => (
+                          <NavLink
+                            key={to}
+                            to={to}
+                            className="block px-6 py-4 text-gray-800 font-medium
+                            hover:bg-[#FDEAF1] hover:text-[#AF3059] transition"
+                          >
+                            {label}
+                          </NavLink>
+                        ))}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </li>
+
+                <li><NavLink to="/team-bios" className={linkClass}>Team</NavLink></li>
+                <li><NavLink to="/licenses-certifications" className={linkClass}>Licenses</NavLink></li>
+                <li><NavLink to="/resources" className={linkClass}>Resources</NavLink></li>
+                <li><NavLink to="/blog" className={linkClass}>Blog</NavLink></li>
+                <li><NavLink to="/faq" className={linkClass}>FAQ</NavLink></li>
+              </ul>
+
+              {/* CTA */}
+              <NavLink to="/contact" className="hidden lg:block">
+                <motion.button
+                  whileHover={{ scale: 1.06, y: -2 }}
+                  whileTap={{ scale: 0.96 }}
+                  className="px-8 py-3 rounded-full font-semibold
+                  bg-white text-[#AF3059]
+                  shadow-[0_12px_30px_rgba(255,255,255,0.35)]"
                 >
-                  Autism Spectrum Disorder
-                </a>
+                  Request Consultation
+                </motion.button>
+              </NavLink>
 
-                <NavLink to="/campaigns" className="block px-5 py-3 text-sm text-gray-700 hover:bg-[#0B5ED7]/10 hover:text-[#0B5ED7]">
-                  Campaigns
-                </NavLink>
-              </div>
-            </li>
-          </ul>
-
-          {/* CTA */}
-          <NavLink
-            to="/contact-us"
-            className="hidden lg:inline-flex items-center rounded-full bg-[#0B5ED7] px-6 py-3 text-[15px] font-semibold text-white hover:bg-[#084298] transition"
-          >
-            Contact us
-          </NavLink>
-
-          {/* MOBILE BUTTON */}
-          <button
-            onClick={() => setMenuOpen(true)}
-            className="lg:hidden w-11 h-11 flex items-center justify-center rounded-lg hover:bg-gray-100"
-          >
-            <span className="w-6 h-0.5 bg-gray-700 block relative before:absolute before:w-6 before:h-0.5 before:bg-gray-700 before:-top-2 after:absolute after:w-6 after:h-0.5 after:bg-gray-700 after:top-2"></span>
-          </button>
-        </div>
-      </div>
-
-      {/* ================= MOBILE MENU ================= */}
-      {menuOpen && (
-        <>
-          <div
-            className="fixed inset-0 bg-black/40 backdrop-blur-sm lg:hidden"
-            onClick={() => setMenuOpen(false)}
-          />
-
-          <div className="fixed top-0 right-0 h-full w-80 bg-white shadow-2xl lg:hidden">
-            <div className="flex items-center justify-between p-6 border-b">
-              <h2 className="text-xl font-bold text-[#0B5ED7]">Menu</h2>
+              {/* MOBILE MENU BUTTON */}
               <button
-                onClick={() => setMenuOpen(false)}
-                className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200"
+                onClick={() => setMenuOpen(true)}
+                className="lg:hidden w-11 h-11 rounded-xl bg-white/20
+                backdrop-blur-md flex items-center justify-center"
               >
-                <FaTimes />
+                <span className="w-6 h-0.5 bg-white block relative
+                before:absolute before:w-6 before:h-0.5 before:bg-white before:-top-2
+                after:absolute after:w-6 after:h-0.5 after:bg-white after:top-2" />
               </button>
             </div>
-
-            <ul className="px-6 py-4 space-y-1">
-              <NavLink to="/" onClick={()=>setMenuOpen(false)} className="block px-4 py-3 rounded-lg hover:bg-[#0B5ED7]/10">Home</NavLink>
-              <NavLink to="/about-us" onClick={()=>setMenuOpen(false)} className="block px-4 py-3 rounded-lg hover:bg-[#0B5ED7]/10">About Us</NavLink>
-
-              {/* MOBILE SERVICES */}
-              <li>
-                <button
-                  onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
-                  className="w-full flex items-center justify-between px-4 py-3 rounded-lg font-medium hover:bg-[#0B5ED7]/10"
-                >
-                  <span>Services</span>
-                  <FaChevronDown className={`transition-transform ${mobileServicesOpen ? "rotate-180" : ""}`} />
-                </button>
-
-                {mobileServicesOpen && (
-                  <div className="ml-4 mt-1 space-y-1">
-                    {[
-                      ["Culturally Competent Care", "/services/culturally-responsive-care"],
-                      ["Grace & Respect", "/services/compassion-respect"],
-                      ["Evidence-Based Practice", "/services/evidence-based-aba"],
-                      ["Speed & Agility", "/services/flexible-support"],
-                    ].map(([label, to]) => (
-                      <NavLink
-                        key={to}
-                        to={to}
-                        onClick={() => setMenuOpen(false)}
-                        className="block px-4 py-2 text-sm rounded-lg text-gray-600 hover:bg-[#0B5ED7]/10"
-                      >
-                        {label}
-                      </NavLink>
-                    ))}
-                  </div>
-                )}
-              </li>
-
-              <NavLink to="/faq" onClick={()=>setMenuOpen(false)} className="block px-4 py-3 rounded-lg hover:bg-[#0B5ED7]/10">FAQs</NavLink>
-              <NavLink to="/careers" onClick={()=>setMenuOpen(false)} className="block px-4 py-3 rounded-lg hover:bg-[#0B5ED7]/10">Careers</NavLink>
-              <NavLink to="/team" onClick={()=>setMenuOpen(false)} className="block px-4 py-3 rounded-lg hover:bg-[#0B5ED7]/10">Team</NavLink>
-
-              {/* ✅ MOBILE EXTERNAL LINKS */}
-              <a
-                href="https://www.youtube.com/@DecoderHealth"
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => setMenuOpen(false)}
-                className="block px-4 py-3 rounded-lg hover:bg-[#0B5ED7]/10"
-              >
-                Youtube Channel
-              </a>
-
-              <a
-                href="https://www.nimh.nih.gov/health/statistics/autism-spectrum-disorder-asd"
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => setMenuOpen(false)}
-                className="block px-4 py-3 rounded-lg hover:bg-[#0B5ED7]/10"
-              >
-                Autism Spectrum Disorder
-              </a>
-
-              <NavLink to="/campaigns" onClick={()=>setMenuOpen(false)} className="block px-4 py-3 rounded-lg hover:bg-[#0B5ED7]/10">Campaigns</NavLink>
-            </ul>
-
-            <div className="p-6 border-t">
-              <NavLink
-                to="/contact-us"
-                onClick={() => setMenuOpen(false)}
-                className="block text-center bg-[#0B5ED7] text-white py-3 rounded-lg font-semibold hover:bg-[#084298]"
-              >
-                Contact us
-              </NavLink>
-            </div>
           </div>
-        </>
-      )}
-    </nav>
+        </div>
+      </motion.nav>
+
+      {/* ================= MOBILE DRAWER ================= */}
+      <AnimatePresence>
+        {menuOpen && (
+          <>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 bg-black/40 backdrop-blur-sm z-40"
+              onClick={() => setMenuOpen(false)}
+            />
+
+            <motion.div
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
+              transition={{ duration: 0.35 }}
+              className="fixed top-0 right-0 h-full w-80 z-50 bg-[#AF3059]"
+            >
+              <div className="flex items-center justify-between p-6 border-b border-white/30">
+                <img src={logo} alt="Gentle Hearts" className="h-12" />
+                <button onClick={() => setMenuOpen(false)} className="text-white text-xl">
+                  <FaTimes />
+                </button>
+              </div>
+
+              <nav className="px-6 py-6 space-y-2 text-white font-semibold">
+                <MobileLink to="/" setMenuOpen={setMenuOpen}>Home</MobileLink>
+                <MobileLink to="/about-us" setMenuOpen={setMenuOpen}>About Us</MobileLink>
+                <MobileLink to="/our-story" setMenuOpen={setMenuOpen}>Our Story</MobileLink>
+                <MobileLink to="/services" setMenuOpen={setMenuOpen}>Services</MobileLink>
+                <MobileLink to="/team-bios" setMenuOpen={setMenuOpen}>Team</MobileLink>
+                <MobileLink to="/licenses-certifications" setMenuOpen={setMenuOpen}>Licenses</MobileLink>
+                <MobileLink to="/testimonials" setMenuOpen={setMenuOpen}>Testimonials</MobileLink>
+                <MobileLink to="/care-guides" setMenuOpen={setMenuOpen}>Care Guides</MobileLink>
+                <MobileLink to="/blog" setMenuOpen={setMenuOpen}>Blog</MobileLink>
+                <MobileLink to="/faq" setMenuOpen={setMenuOpen}>FAQ</MobileLink>
+                <MobileLink to="/contact" setMenuOpen={setMenuOpen}>Contact</MobileLink>
+              </nav>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
+    </>
+  );
+}
+
+function MobileLink({ to, children, setMenuOpen }) {
+  return (
+    <NavLink
+      to={to}
+      onClick={() => setMenuOpen(false)}
+      className="block px-4 py-4 rounded-xl hover:bg-white/20 transition"
+    >
+      {children}
+    </NavLink>
   );
 }

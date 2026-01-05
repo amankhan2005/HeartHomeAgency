@@ -30,7 +30,7 @@ export default function App() {
       {/* 🔥 Scroll reset on route change */}
       <RouteScrollTop />
 
-      <TopNavbar />
+       
       <Navbar />
 
       <Routes>

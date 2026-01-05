@@ -1,72 +1,221 @@
- import React from "react";
-import { Link } from "react-router-dom";
+ import { motion } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
 
-/* ===== IMPORT IMAGE MANUALLY ===== */
-import aboutImg from "../assets/about/about-preview.avif";
+/* ================= GENTLE HEARTS – HOME HERO ================= */
 
-export default function AboutPreview() {
+const GentleHeartsHero = () => {
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-[#F5F9FF] via-white to-[#EEF4FF]">
-      {/* Soft background glow */}
-      <div className="absolute -top-40 -left-40 w-[500px] h-[500px] bg-[#0B5ED7]/10 rounded-full blur-[120px]" />
-      <div className="absolute top-1/2 -right-40 w-[500px] h-[500px] bg-[#0B5ED7]/10 rounded-full blur-[120px]" />
+    <section
+      className="
+        relative w-full
+        bg-white
+        overflow-hidden
+      "
+    >
+      {/* SOFT PINK BRAND GLOW */}
+      <div className="absolute -top-40 -left-40 w-[520px] h-[520px] bg-[#AF3059]/10 rounded-full blur-[140px]" />
+      <div className="absolute bottom-0 -right-40 w-[520px] h-[520px] bg-[#AF3059]/5 rounded-full blur-[140px]" />
 
-      <div className="relative max-w-7xl mx-auto px-5 sm:px-6 py-14 lg:py-16">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+      <div className="relative max-w-7xl mx-auto px-6 md:px-10 py-24">
+        <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-16">
 
           {/* LEFT CONTENT */}
-          <div className="text-center lg:text-left">
-            <span className="inline-block mb-5 text-xs sm:text-sm font-semibold text-[#0B5ED7] tracking-widest uppercase">
-              Applied Behavior Analysis (ABA) Therapy for Autism
+          <motion.div
+            initial={{ opacity: 0, y: 22 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, ease: "easeOut" }}
+          >
+            {/* BRAND BADGE */}
+            <span
+              className="
+                inline-block mb-4 px-5 py-2 rounded-full
+                text-sm font-semibold
+                bg-[#AF3059]/10 text-[#AF3059]
+              "
+            >
+              Private-Pay Home Health Care
             </span>
 
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-[#0A2540] leading-tight">
-              Understanding your child’s needs through{" "}
-              <span className="text-[#0B5ED7]">
-                evidence-based Applied Behavior Analysis
-              </span>
+            {/* MAIN HEADING */}
+            <h1
+              className="
+                text-4xl md:text-6xl font-extrabold
+                leading-tight text-[#0D3951]
+              "
+            >
+              Elite In-Home Nursing <br />
+              and <span className="text-[#AF3059]">Rehabilitation</span> <br />
+              in Massachusetts
             </h1>
 
-            <p className="mt-6 sm:mt-8 text-base sm:text-lg lg:text-xl text-gray-600 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
-              We provide personalized, culturally responsive{" "}
-              <strong>Applied Behavior Analysis (ABA) therapy</strong> to support
-              children with <strong>autism spectrum disorder (ASD)</strong>.
-              Our approach focuses on building communication, independence,
-              confidence, and meaningful progress for every child and family.
+            {/* SUBTEXT */}
+            <p className="mt-6 text-lg text-slate-600 max-w-xl leading-relaxed">
+              Private-pay, high-touch care for stroke recovery, dementia care,
+              post-surgical recovery, and neuro-cardiac rehabilitation — delivered
+              with dignity in the comfort of home.
             </p>
 
-            <div className="mt-10 sm:mt-12 flex flex-col sm:flex-row gap-4 sm:gap-5 justify-center lg:justify-start">
-              <a
-                href="https://calendly.com/alasway/30min?month=2025-12"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full sm:w-auto bg-[#0B5ED7] hover:bg-[#084298] text-white px-9 py-4 rounded-xl font-semibold shadow-lg transition text-center"
-              >
-                Schedule a Consultation
-              </a>
+            {/* CTA BUTTONS */}
+            <div className="mt-10 flex flex-wrap gap-5">
 
-              <Link
-                to="/about-us"
-                className="w-full sm:w-auto bg-white text-[#0B5ED7] border border-[#0B5ED7]/30 hover:border-[#0B5ED7] px-9 py-4 rounded-xl font-semibold shadow-sm transition text-center"
-              >
-                Learn More
-              </Link>
-            </div>
-          </div>
+  {/* PRIMARY CTA – PULSE + SHINE + LIFT */}
+  <motion.a
+    href="/contact"
+    className="
+      relative overflow-hidden
+      inline-flex items-center justify-center
+      px-8 py-4 rounded-full
+      text-white font-semibold
+      bg-[#AF3059]
+    "
+    initial={{ boxShadow: "0px 10px 24px rgba(175,48,89,0.28)" }}
+    animate={{
+      boxShadow: [
+        "0px 12px 28px rgba(175,48,89,0.30)",
+        "0px 18px 40px rgba(175,48,89,0.45)",
+        "0px 12px 28px rgba(175,48,89,0.30)",
+      ],
+    }}
+    transition={{
+      duration: 3.2,
+      repeat: Infinity,
+      ease: "easeInOut",
+    }}
+    whileHover={{
+      scale: 1.07,
+      y: -4,
+      boxShadow: "0px 22px 48px rgba(175,48,89,0.55)",
+    }}
+    whileTap={{ scale: 0.96 }}
+  >
+    {/* SHINE SWEEP */}
+    <span
+      className="
+        pointer-events-none
+        absolute inset-0
+        -translate-x-full
+        bg-gradient-to-r from-transparent via-white/35 to-transparent
+        group-hover:translate-x-full
+        transition-transform duration-700
+      "
+    />
+    <span className="relative z-10">
+      Request Private-Pay Consultation
+    </span>
+  </motion.a>
 
-          {/* RIGHT IMAGE */}
-          <div className="flex justify-center lg:justify-end">
-            <div className="relative bg-white/70 backdrop-blur-xl rounded-[32px] shadow-2xl p-4">
-              <img
-                src={aboutImg}
-                alt="Applied Behavior Analysis (ABA) therapy for children with autism"
-                className="rounded-[28px] object-cover w-full max-w-sm sm:max-w-md lg:max-w-xl"
-              />
-            </div>
-          </div>
+  {/* SECONDARY CTA – FLOAT + SOFT FILL */}
+  <motion.a
+    href="/services"
+    className="
+      relative overflow-hidden
+      inline-flex items-center justify-center
+      px-8 py-4 rounded-full
+      font-semibold
+      border-2 border-[#AF3059]
+      text-[#AF3059]
+      bg-transparent
+    "
+    whileHover={{
+      y: -3,
+      scale: 1.05,
+    }}
+    whileTap={{ scale: 0.96 }}
+    transition={{ type: "spring", stiffness: 260, damping: 18 }}
+  >
+    {/* SOFT FILL */}
+    <span className="absolute inset-0 bg-[#AF3059]/10 opacity-0 hover:opacity-100 transition-opacity duration-300" />
+    <span className="relative z-10">
+      View Our Services
+    </span>
+  </motion.a>
 
+</div>
+
+          </motion.div>
+
+          {/* RIGHT VISUAL GRID */}
+          <ShuffleGrid />
         </div>
       </div>
     </section>
   );
-}
+};
+
+/* ================= IMAGE GRID ================= */
+
+const squareData = [
+  { id: 1, src: "https://images.unsplash.com/photo-1580281657521-6b3c5c99c7d2?q=80&w=800" },
+  { id: 2, src: "https://images.unsplash.com/photo-1584515933487-779824d29309?q=80&w=800" },
+  { id: 3, src: "https://images.unsplash.com/photo-1586773860418-d37222d8fce3?q=80&w=800" },
+  { id: 4, src: "https://images.unsplash.com/photo-1550831107-1553da8c8464?q=80&w=800" },
+  { id: 5, src: "https://images.unsplash.com/photo-1600959907703-c41f0a7c1f91?q=80&w=800" },
+  { id: 6, src: "https://images.unsplash.com/photo-1580281657521-6b3c5c99c7d2?q=80&w=800" },
+  { id: 7, src: "https://images.unsplash.com/photo-1584515933487-779824d29309?q=80&w=800" },
+  { id: 8, src: "https://images.unsplash.com/photo-1586773860418-d37222d8fce3?q=80&w=800" },
+  { id: 9, src: "https://images.unsplash.com/photo-1550831107-1553da8c8464?q=80&w=800" },
+  { id: 10, src: "https://images.unsplash.com/photo-1600959907703-c41f0a7c1f91?q=80&w=800" },
+  { id: 11, src: "https://images.unsplash.com/photo-1580281657521-6b3c5c99c7d2?q=80&w=800" },
+  { id: 12, src: "https://images.unsplash.com/photo-1584515933487-779824d29309?q=80&w=800" },
+  { id: 13, src: "https://images.unsplash.com/photo-1586773860418-d37222d8fce3?q=80&w=800" },
+  { id: 14, src: "https://images.unsplash.com/photo-1550831107-1553da8c8464?q=80&w=800" },
+  { id: 15, src: "https://images.unsplash.com/photo-1600959907703-c41f0a7c1f91?q=80&w=800" },
+  { id: 16, src: "https://images.unsplash.com/photo-1580281657521-6b3c5c99c7d2?q=80&w=800" },
+];
+
+const shuffle = (arr) => {
+  const copy = [...arr];
+  for (let i = copy.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [copy[i], copy[j]] = [copy[j], copy[i]];
+  }
+  return copy;
+};
+
+const generateSquares = () =>
+  shuffle(squareData).map((sq) => (
+    <motion.div
+      key={sq.id}
+      layout
+      transition={{ duration: 1.4, type: "spring", damping: 22 }}
+      className="w-full h-full rounded-xl ring-1 ring-[#AF3059]/20"
+      style={{
+        backgroundImage: `url(${sq.src})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    />
+  ));
+
+const ShuffleGrid = () => {
+  const timeoutRef = useRef(null);
+  const [squares, setSquares] = useState(generateSquares());
+
+  useEffect(() => {
+    shuffleSquares();
+    return () => clearTimeout(timeoutRef.current);
+  }, []);
+
+  const shuffleSquares = () => {
+    setSquares(generateSquares());
+    timeoutRef.current = setTimeout(shuffleSquares, 4500);
+  };
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, scale: 0.96 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.7 }}
+      className="
+        grid grid-cols-4 grid-rows-4
+        h-[420px] gap-2
+        rounded-3xl overflow-hidden
+        shadow-[0_30px_70px_rgba(175,48,89,0.25)]
+      "
+    >
+      {squares}
+    </motion.div>
+  );
+};
+
+export default GentleHeartsHero;
