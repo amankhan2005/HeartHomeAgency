@@ -3,28 +3,20 @@ import { ChevronDown, HelpCircle, CheckCircle } from "lucide-react";
 
 const faqs = [
   {
-    q: "What is ABA?",
-    a: "Applied Behavior Analysis (ABA) is an evidence-based therapy focused on improving socially significant behaviors such as communication, learning, and daily living skills using positive reinforcement."
+    q: "What services does Gentle Hearts Home Health Care provide?",
+    a: "Gentle Hearts provides private-pay, in-home nursing and rehabilitation services including stroke recovery, dementia and Alzheimer’s care, post-surgical recovery, care coordination, and concierge-level support."
   },
   {
-    q: "What is the purpose of the ABA program?",
-    a: "The goal of an ABA program is to help individuals increase useful behaviors and reduce behaviors that interfere with learning, independence, and quality of life."
+    q: "Do you provide care in the patient’s home?",
+    a: "Yes. All services are delivered in the comfort and privacy of the patient’s home, allowing for personalized, one-on-one care in a familiar environment."
   },
   {
-    q: "What is telemedicine?",
-    a: "Telemedicine allows therapy and clinical services to be delivered remotely using secure video conferencing, making care more accessible and flexible for families."
+    q: "What is stroke recovery and neuro-rehabilitation care?",
+    a: "Stroke recovery and neuro-rehabilitation focus on helping patients regain mobility, strength, and daily living skills after a stroke or neurological condition through clinically guided, in-home care."
   },
   {
-    q: "Which services may be provided via telemedicine?",
-    a: "Services such as parent training, caregiver coaching, assessments, progress reviews, and clinical supervision may be provided through telemedicine when appropriate."
-  },
-  {
-    q: "What is ASD?",
-    a: "Autism Spectrum Disorder (ASD) is a neurodevelopmental condition that affects communication, social interaction, and behavior, with varying levels of support needs."
-  },
-  {
-    q: "What ICD-10 codes are used for autism?",
-    a: "The most commonly used ICD-10 code for Autism Spectrum Disorder is F84.0. Additional codes may be used depending on associated conditions or developmental delays."
+    q: "Do you offer dementia and Alzheimer’s care?",
+    a: "Yes. Our caregivers are trained to support individuals with dementia and Alzheimer’s disease using compassionate, structured, and safety-focused care plans tailored to each patient’s needs."
   },
   
 ];
@@ -55,28 +47,20 @@ export default function FAQPreview() {
       id="faq-preview"
       className="max-w-7xl mx-auto px-4 sm:px-6 py-20 relative overflow-hidden"
     >
-      {/* Background Decoration (BLUE) */}
-      <div className="absolute top-0 left-0 w-96 h-96    rounded-full blur-3xl -z-10" />
-      <div className="absolute bottom-0 right-0 w-80 h-80   rounded-full blur-3xl -z-10" />
-
       {/* Header */}
       <header className="mb-16 text-center space-y-6">
-        <div className="inline-flex items-center gap-2 bg-[#F5F9FF] border border-[#D6E4FF] text-[#0B5ED7] px-5 py-2.5 rounded-full text-sm font-semibold">
-          <HelpCircle className="w-4 h-4" />
-          Common Questions
-        </div>
+      
 
-        <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#0A2540] leading-tight">
+        <h2 className="text-4xl md:text-5xl font-bold text-[#0D3951]">
           Frequently Asked Questions
         </h2>
 
-        <p className="mt-4 text-lg md:text-xl text-[#425466] max-w-3xl mx-auto leading-relaxed">
-          Clear answers about{" "}
-          <span className="text-[#0B5ED7] font-semibold">ABA therapy</span>,
-          autism, and telehealth services.
+        <p className="mt-4 text-lg text-slate-600 max-w-3xl mx-auto">
+          Clear answers about our in-home nursing, rehabilitation services, and
+          private-pay care model.
         </p>
 
-        <div className="w-24 h-1.5 bg-gradient-to-r from-[#0B5ED7] to-[#084298] mx-auto rounded-full" />
+        <div className="w-24 h-1.5 bg-[#AF3059] mx-auto rounded-full" />
       </header>
 
       {/* FAQ Grid */}
@@ -88,8 +72,8 @@ export default function FAQPreview() {
               key={f.q}
               className={`group bg-white rounded-2xl shadow-md hover:shadow-xl overflow-hidden border-2 transition-all duration-300 ${
                 isOpen
-                  ? "border-[#0B5ED7] shadow-blue-100"
-                  : "border-gray-100 hover:border-[#0B5ED7]/30"
+                  ? "border-[#AF3059]"
+                  : "border-gray-100 hover:border-[#AF3059]/30"
               }`}
             >
               {/* Question */}
@@ -103,8 +87,8 @@ export default function FAQPreview() {
                     <div
                       className={`w-8 h-8 rounded-lg flex items-center justify-center text-sm font-bold transition ${
                         isOpen
-                          ? "bg-[#0B5ED7] text-white"
-                          : "bg-[#F5F9FF] text-[#0B5ED7]"
+                          ? "bg-[#AF3059] text-white"
+                          : "bg-[#FDEAF1] text-[#AF3059]"
                       }`}
                     >
                       {i + 1}
@@ -113,8 +97,8 @@ export default function FAQPreview() {
                     <h3
                       className={`text-lg font-bold transition ${
                         isOpen
-                          ? "text-[#0B5ED7]"
-                          : "text-[#0A2540] group-hover:text-[#0B5ED7]"
+                          ? "text-[#AF3059]"
+                          : "text-[#0D3951] group-hover:text-[#AF3059]"
                       }`}
                     >
                       {f.q}
@@ -124,7 +108,7 @@ export default function FAQPreview() {
                   <div
                     className={`w-10 h-10 rounded-full flex items-center justify-center transition ${
                       isOpen
-                        ? "bg-[#0B5ED7]/10 text-[#0B5ED7] rotate-180"
+                        ? "bg-[#AF3059]/10 text-[#AF3059] rotate-180"
                         : "bg-gray-100 text-gray-500"
                     }`}
                   >
@@ -140,8 +124,8 @@ export default function FAQPreview() {
                 style={{ maxHeight: 0, opacity: 0 }}
               >
                 <div className="pb-6 pt-2 flex gap-3">
-                  <CheckCircle className="w-5 h-5 text-[#0B5ED7] mt-1" />
-                  <p className="text-[#425466] leading-relaxed">
+                  <CheckCircle className="w-5 h-5 text-[#AF3059] mt-1" />
+                  <p className="text-slate-600 leading-relaxed">
                     {f.a}
                   </p>
                 </div>

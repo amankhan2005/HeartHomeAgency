@@ -26,37 +26,40 @@ export default function MainNavbar() {
      after:bg-white after:transition-all after:duration-300
      ${isActive ? "after:w-6" : "after:w-0 hover:after:w-6"}`;
 
+  const services = [
+    ["Stroke Recovery & Neuro-Rehabilitation", "/services/stroke-recovery-neuro-rehab"],
+    ["Dementia & Alzheimer’s Care", "/services/dementia-alzheimers-care"],
+    ["Post-Surgical Recovery", "/services/post-surgical-recovery"],
+    ["Comprehensive Care Coordination", "/services/comprehensive-care-coordination"],
+    ["Concierge & White-Glove Add-Ons", "/services/concierge-add-ons"],
+    ["Private-Pay Model", "/services/private-pay-model"],
+    ["Physician & Hospital Partnerships", "/services/physician-hospital-partnerships"],
+  ];
+
   return (
     <>
-      {/* ================= NAVBAR ================= */}
+      {/* NAVBAR */}
       <motion.nav
         initial={{ y: -18, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.45 }}
         className={`w-full z-50 ${scrolled ? "fixed top-0" : "relative"}`}
       >
-        <div
-          className={`w-full backdrop-blur-xl bg-[#AF3059]/95
+        <div className={`w-full backdrop-blur-xl bg-[#AF3059]/95
           border-b border-white/20 shadow-[0_10px_40px_rgba(175,48,89,0.35)]
-          transition-all ${scrolled ? "py-3" : "py-5"}`}
-        >
+          transition-all ${scrolled ? "py-3" : "py-5"}`}>
           <div className="max-w-7xl mx-auto px-6">
             <div className="flex items-center justify-between">
 
               {/* LOGO */}
               <NavLink to="/" className="flex items-center gap-3">
-                <img
-                  src={logo}
-                  alt="Gentle Hearts Home Health Care Agency"
-                  className="h-20 w-auto rounded-xl"
-                />
+                <img src={logo} alt="Gentle Hearts" className="h-20 rounded-xl" />
               </NavLink>
 
               {/* DESKTOP NAV */}
               <ul className="hidden lg:flex items-center gap-1">
                 <li><NavLink to="/" className={linkClass}>Home</NavLink></li>
                 <li><NavLink to="/about-us" className={linkClass}>About Us</NavLink></li>
-                <li><NavLink to="/our-story" className={linkClass}>Our Story</NavLink></li>
 
                 {/* SERVICES DROPDOWN */}
                 <li
@@ -65,7 +68,7 @@ export default function MainNavbar() {
                   onMouseLeave={() => setOpenDropdown(null)}
                 >
                   <div className="flex items-center gap-1 px-5 py-4 cursor-pointer font-semibold text-white/80 hover:text-white">
-                    Services <FaChevronDown className="text-xs mt-[1px]" />
+                    Services <FaChevronDown className="text-xs" />
                   </div>
 
                   <AnimatePresence>
@@ -79,15 +82,7 @@ export default function MainNavbar() {
                         bg-white/95 backdrop-blur-xl border border-gray-200
                         shadow-[0_25px_60px_rgba(0,0,0,0.15)] overflow-hidden"
                       >
-                        {[
-                          ["Stroke Recovery & Neuro-Rehabilitation", "/services/stroke-recovery-neuro-rehab"],
-                          ["Dementia & Alzheimer’s Care", "/services/dementia-alzheimers-care"],
-                          ["Post-Surgical Recovery", "/services/post-surgical-recovery"],
-                          ["Comprehensive Care Coordination", "/services/comprehensive-care-coordination"],
-                          ["Concierge & White-Glove Add-Ons", "/services/concierge-add-ons"],
-                          ["Private-Pay Model", "/services/private-pay-model"],
-                          ["Physician & Hospital Partnerships", "/services/physician-hospital-partnerships"],
-                        ].map(([label, to]) => (
+                        {services.map(([label, to]) => (
                           <NavLink
                             key={to}
                             to={to}
@@ -102,11 +97,7 @@ export default function MainNavbar() {
                   </AnimatePresence>
                 </li>
 
-                <li><NavLink to="/team-bios" className={linkClass}>Team</NavLink></li>
-                <li><NavLink to="/licenses-certifications" className={linkClass}>Licenses</NavLink></li>
-                <li><NavLink to="/resources" className={linkClass}>Resources</NavLink></li>
-                <li><NavLink to="/blog" className={linkClass}>Blog</NavLink></li>
-                <li><NavLink to="/faq" className={linkClass}>FAQ</NavLink></li>
+                <li><NavLink to="/faq" className={linkClass}>FAQs</NavLink></li>
               </ul>
 
               {/* CTA */}
@@ -115,18 +106,16 @@ export default function MainNavbar() {
                   whileHover={{ scale: 1.06, y: -2 }}
                   whileTap={{ scale: 0.96 }}
                   className="px-8 py-3 rounded-full font-semibold
-                  bg-white text-[#AF3059]
-                  shadow-[0_12px_30px_rgba(255,255,255,0.35)]"
+                  bg-white text-[#AF3059] shadow-[0_12px_30px_rgba(255,255,255,0.35)]"
                 >
-                  Request Consultation
+                  Contact Us
                 </motion.button>
               </NavLink>
 
-              {/* MOBILE MENU BUTTON */}
+              {/* MOBILE MENU */}
               <button
                 onClick={() => setMenuOpen(true)}
-                className="lg:hidden w-11 h-11 rounded-xl bg-white/20
-                backdrop-blur-md flex items-center justify-center"
+                className="lg:hidden w-11 h-11 rounded-xl bg-white/20 backdrop-blur-md flex items-center justify-center"
               >
                 <span className="w-6 h-0.5 bg-white block relative
                 before:absolute before:w-6 before:h-0.5 before:bg-white before:-top-2
@@ -137,7 +126,7 @@ export default function MainNavbar() {
         </div>
       </motion.nav>
 
-      {/* ================= MOBILE DRAWER ================= */}
+      {/* MOBILE DRAWER */}
       <AnimatePresence>
         {menuOpen && (
           <>
@@ -145,7 +134,7 @@ export default function MainNavbar() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-black/40 backdrop-blur-sm z-40"
+              className="fixed inset-0 bg-black/40 z-40"
               onClick={() => setMenuOpen(false)}
             />
 
@@ -166,15 +155,15 @@ export default function MainNavbar() {
               <nav className="px-6 py-6 space-y-2 text-white font-semibold">
                 <MobileLink to="/" setMenuOpen={setMenuOpen}>Home</MobileLink>
                 <MobileLink to="/about-us" setMenuOpen={setMenuOpen}>About Us</MobileLink>
-                <MobileLink to="/our-story" setMenuOpen={setMenuOpen}>Our Story</MobileLink>
-                <MobileLink to="/services" setMenuOpen={setMenuOpen}>Services</MobileLink>
-                <MobileLink to="/team-bios" setMenuOpen={setMenuOpen}>Team</MobileLink>
-                <MobileLink to="/licenses-certifications" setMenuOpen={setMenuOpen}>Licenses</MobileLink>
-                <MobileLink to="/testimonials" setMenuOpen={setMenuOpen}>Testimonials</MobileLink>
-                <MobileLink to="/care-guides" setMenuOpen={setMenuOpen}>Care Guides</MobileLink>
-                <MobileLink to="/blog" setMenuOpen={setMenuOpen}>Blog</MobileLink>
-                <MobileLink to="/faq" setMenuOpen={setMenuOpen}>FAQ</MobileLink>
-                <MobileLink to="/contact" setMenuOpen={setMenuOpen}>Contact</MobileLink>
+
+                {services.map(([label, to]) => (
+                  <MobileLink key={to} to={to} setMenuOpen={setMenuOpen}>
+                    {label}
+                  </MobileLink>
+                ))}
+
+                <MobileLink to="/faq" setMenuOpen={setMenuOpen}>FAQs</MobileLink>
+                <MobileLink to="/contact" setMenuOpen={setMenuOpen}>Contact Us</MobileLink>
               </nav>
             </motion.div>
           </>

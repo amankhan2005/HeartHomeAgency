@@ -1,22 +1,22 @@
- import React from 'react';
- import AboutPreview from '../components/AboutPreview';
-import ServicesGrid from '../components/ServicesGrid';
- import FAQPreview from '../components/FAQPreview';
-  import AboutSection from '../components/AboutSection';
-import InsurancePartners from '../components/InsurancePartners';
-import TeamSection  from '../components/teamMembers';
-export default function Home(){
-return (
-<div>
- 
- <AboutPreview />
-<ServicesGrid />
-<AboutSection />
-<InsurancePartners />
-<TeamSection />
- <FAQPreview />
- 
-  
-</div>
-);
+ import React from "react";
+
+ import ServicesSnapshot from "../components/ServicesSnapshot";
+import WhyGentleHearts from "../components/WhyGentleHearts";
+import CareProcess from "../components/CareProcess";
+import AboutPreview from "../components/AboutPreview";
+import FinalCTA from "../components/FinalCTA";
+import FAQPreview from "../components/FAQPreview";
+import AboutSection from "../components/AboutSection";
+export default function Home() {
+  return (
+    <div>
+         <AboutPreview />
+         <AboutSection />
+       <ServicesSnapshot />
+      <WhyGentleHearts />
+      <CareProcess />
+      <FAQPreview />
+     
+    </div>
+  );
 }
