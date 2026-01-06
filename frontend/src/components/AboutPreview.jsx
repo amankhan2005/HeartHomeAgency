@@ -60,7 +60,7 @@ const GentleHeartsHero = () => {
 
   {/* PRIMARY CTA – PULSE + SHINE + LIFT */}
   <motion.a
-    href="/contact"
+    href="/contact-us"
     className="
       relative overflow-hidden
       inline-flex items-center justify-center
@@ -106,7 +106,7 @@ const GentleHeartsHero = () => {
 
   {/* SECONDARY CTA – FLOAT + SOFT FILL */}
   <motion.a
-    href="/services"
+    href="/services/private-pay-model"
     className="
       relative overflow-hidden
       inline-flex items-center justify-center

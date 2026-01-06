@@ -49,13 +49,13 @@ export default function About() {
 
             <div className="mt-8 flex flex-wrap gap-4">
               <NavLink
-                to="/contact"
+                to="/contact-us"
                 className="px-8 py-4 rounded-full bg-white text-[#AF3059] font-semibold hover:scale-105 transition"
               >
                 Request Private-Pay Consultation
               </NavLink>
               <NavLink
-                to="/services"
+                to="/services/private-pay-model"
                 className="px-8 py-4 rounded-full border border-white font-semibold hover:bg-white hover:text-[#AF3059] transition"
               >
                 Explore Our Services
