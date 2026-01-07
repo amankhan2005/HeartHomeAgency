@@ -55,55 +55,60 @@ export const createContact = async (req, res) => {
     /* ===================================================== */
     /* ADMIN EMAIL TEMPLATE (Blue / White – Professional)    */
     /* ===================================================== */
-    const adminHtml = `
-<table width="100%" cellpadding="0" cellspacing="0" style="background:#F5F9FF;padding:30px;font-family:Arial,sans-serif;">
+  const adminHtml = `
+<table width="100%" cellpadding="0" cellspacing="0" style="background:#FFF5F8;padding:32px;font-family:Arial,sans-serif;">
   <tr>
     <td align="center">
-      <table width="600" cellpadding="0" cellspacing="0" style="background:#ffffff;border-radius:10px;overflow:hidden;">
+      <table width="600" cellpadding="0" cellspacing="0" style="background:#ffffff;border-radius:14px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,0.08);">
         
+        <!-- Header -->
         <tr>
-          <td style="background:#1E63D9;color:#ffffff;padding:20px 30px;">
-            <h2 style="margin:0;">Decoder Health</h2>
-            <p style="margin:5px 0 0;font-size:14px;">New Contact Inquiry</p>
-          </td>
-        </tr>
-
-        <tr>
-          <td style="padding:30px;color:#333;">
-            <h3 style="color:#1E63D9;margin-top:0;">📩 New Message Received</h3>
-
-            <table width="100%" cellpadding="8" cellspacing="0" style="font-size:14px;">
-              <tr>
-                <td width="35%"><strong>Name</strong></td>
-                <td>${escapeHtml(contact.firstName)} ${escapeHtml(contact.lastName)}</td>
-              </tr>
-              <tr>
-                <td><strong>Email</strong></td>
-                <td>${escapeHtml(contact.email)}</td>
-              </tr>
-              <tr>
-                <td><strong>Phone</strong></td>
-                <td>${escapeHtml(contact.phone)}</td>
-              </tr>
-              <tr>
-                <td valign="top"><strong>Message</strong></td>
-                <td>${escapeHtml(contact.message)}</td>
-              </tr>
-            </table>
-
-            <hr style="margin:25px 0;border:none;border-top:1px solid #E5EAF5;" />
-
-            <p style="font-size:12px;color:#777;">
-              Source: ${escapeHtml(contact.source)}<br/>
-              IP: ${escapeHtml(contact.ipAddress)}<br/>
-              User Agent: ${escapeHtml(contact.userAgent)}
+          <td style="background:#AF3059;color:#ffffff;padding:22px 30px;">
+            <h2 style="margin:0;font-size:22px;">Gentle Hearts Home Health Care</h2>
+            <p style="margin:6px 0 0;font-size:14px;opacity:0.95;">
+              New Contact Inquiry Received
             </p>
           </td>
         </tr>
 
+        <!-- Body -->
         <tr>
-          <td style="background:#F0F4FF;padding:15px;text-align:center;font-size:12px;color:#555;">
-            Decoder Health • Autism Therapy & Support
+          <td style="padding:32px;color:#333;">
+            <h3 style="color:#0B3A6A;margin-top:0;">📩 Contact Form Submission</h3>
+
+            <table width="100%" cellpadding="10" cellspacing="0" style="font-size:14px;border-collapse:collapse;">
+              <tr>
+                <td width="35%" style="color:#555;"><strong>Name</strong></td>
+                <td>${escapeHtml(contact.firstName)} ${escapeHtml(contact.lastName)}</td>
+              </tr>
+              <tr>
+                <td style="color:#555;"><strong>Email</strong></td>
+                <td>${escapeHtml(contact.email)}</td>
+              </tr>
+              <tr>
+                <td style="color:#555;"><strong>Phone</strong></td>
+                <td>${escapeHtml(contact.phone)}</td>
+              </tr>
+              <tr>
+                <td valign="top" style="color:#555;"><strong>Message</strong></td>
+                <td>${escapeHtml(contact.message)}</td>
+              </tr>
+            </table>
+
+            <hr style="margin:28px 0;border:none;border-top:1px solid #F1D2DC;" />
+
+            <p style="font-size:12px;color:#777;line-height:1.6;">
+              <strong>Source:</strong> ${escapeHtml(contact.source)}<br/>
+              <strong>IP Address:</strong> ${escapeHtml(contact.ipAddress)}<br/>
+              <strong>User Agent:</strong> ${escapeHtml(contact.userAgent)}
+            </p>
+          </td>
+        </tr>
+
+        <!-- Footer -->
+        <tr>
+          <td style="background:#FFF0F5;padding:16px;text-align:center;font-size:12px;color:#666;">
+            Gentle Hearts Home Health Care Agency • Private-Pay In-Home Care
           </td>
         </tr>
 
@@ -116,51 +121,58 @@ export const createContact = async (req, res) => {
     /* ===================================================== */
     /* USER CONFIRMATION EMAIL (Warm + Reassuring)           */
     /* ===================================================== */
-    const userHtml = `
-<table width="100%" cellpadding="0" cellspacing="0" style="background:#F5F9FF;padding:30px;font-family:Arial,sans-serif;">
+  const userHtml = `
+<table width="100%" cellpadding="0" cellspacing="0" style="background:#FFF5F8;padding:32px;font-family:Arial,sans-serif;">
   <tr>
     <td align="center">
-      <table width="600" cellpadding="0" cellspacing="0" style="background:#ffffff;border-radius:10px;overflow:hidden;">
+      <table width="600" cellpadding="0" cellspacing="0" style="background:#ffffff;border-radius:14px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,0.08);">
 
+        <!-- Header -->
         <tr>
-          <td style="background:#1E63D9;color:#ffffff;padding:25px 30px;">
-            <h2 style="margin:0;">Decoder Health</h2>
-            <p style="margin:6px 0 0;font-size:14px;">Autism Therapy & Family Support</p>
+          <td style="background:#AF3059;color:#ffffff;padding:26px 30px;">
+            <h2 style="margin:0;font-size:22px;">Gentle Hearts Home Health Care</h2>
+            <p style="margin:6px 0 0;font-size:14px;">
+              Compassionate In-Home Care
+            </p>
           </td>
         </tr>
 
+        <!-- Body -->
         <tr>
-          <td style="padding:30px;color:#333;">
-            <h3 style="color:#1E63D9;margin-top:0;">Thank You for Reaching Out</h3>
+          <td style="padding:32px;color:#333;">
+            <h3 style="color:#0B3A6A;margin-top:0;">
+              Thank You for Contacting Us
+            </h3>
 
             <p>Hello ${escapeHtml(contact.firstName)},</p>
 
-            <p style="line-height:1.6;">
-              Thank you for contacting <strong>Decoder Health</strong>.
-              We have received your message, and a member of our care team
-              will connect with you shortly.
+            <p style="line-height:1.7;">
+              Thank you for reaching out to <strong>Gentle Hearts Home Health Care</strong>.
+              We’ve received your message, and a member of our care coordination
+              team will contact you shortly.
             </p>
 
-            <div style="background:#F5F9FF;border-left:4px solid #1E63D9;padding:15px;margin:20px 0;">
+            <div style="background:#FFF0F5;border-left:4px solid #AF3059;padding:16px;margin:24px 0;">
               <strong>Your Message:</strong><br/>
               ${escapeHtml(contact.message)}
             </div>
 
-            <p style="line-height:1.6;">
-              We are committed to providing compassionate, evidence-based
-              autism therapy and supporting families at every step.
+            <p style="line-height:1.7;">
+              Our mission is to deliver dignified, personalized, and clinically
+              guided care in the comfort of home — with compassion at every step.
             </p>
 
-            <p style="margin-top:25px;">
+            <p style="margin-top:28px;">
               Warm regards,<br/>
-              <strong>Decoder Health Team</strong>
+              <strong>Gentle Hearts Care Team</strong>
             </p>
           </td>
         </tr>
 
+        <!-- Footer -->
         <tr>
-          <td style="background:#F0F4FF;padding:15px;text-align:center;font-size:12px;color:#555;">
-            © ${new Date().getFullYear()} Decoder Health • Empowering Every Ability
+          <td style="background:#FFF0F5;padding:16px;text-align:center;font-size:12px;color:#666;">
+            © ${new Date().getFullYear()} Gentle Hearts Home Health Care Agency
           </td>
         </tr>
 
