@@ -26,7 +26,7 @@ export default function Footer() {
   /* -------- SOCIAL LINKS -------- */
   const instagram =
     "https://www.instagram.com/gentleheartshomecareagency/";
-  const twitter = "https://x.com/gentle_hom33244";
+  const twitter = "https://x.com/gentleheartshha";
 
   const facebook = settings?.facebook || "";
   const tiktok = settings?.tiktok || "";
