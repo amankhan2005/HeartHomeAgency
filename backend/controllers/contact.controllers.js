@@ -19,13 +19,16 @@ const adminHtml = (c) => `
 <p><b>Phone:</b> ${escapeHtml(c.phone)}</p>
 <p><b>Message:</b><br/>${escapeHtml(c.message)}</p>
 <hr/>
-<p><small>IP: ${escapeHtml(c.ipAddress)}</small></p>
+<p><small>
+IP: ${escapeHtml(c.ipAddress || "Unknown")}<br/>
+Agent: ${escapeHtml(c.userAgent || "Unknown")}
+</small></p>
 `;
 
 const userHtml = (c) => `
 <p>Hello ${escapeHtml(c.firstName)},</p>
 <p>Thank you for contacting <b>Gentle Hearts Home Health Care</b>.</p>
-<p>We have received your message and will contact you shortly.</p>
+<p>We have received your message and will get back to you shortly.</p>
 <hr/>
 <p><b>Your Message:</b><br/>${escapeHtml(c.message)}</p>
 <br/>
@@ -35,17 +38,23 @@ const userHtml = (c) => `
 /* ------------------------------------------------ */
 /* CREATE CONTACT (PUBLIC)                          */
 /* ------------------------------------------------ */
- export const createContact = (req, res) => {
-  // ✅ respond instantly
+export const createContact = (req, res) => {
+  // ✅ instant response (UX friendly)
   res.status(202).json({
     ok: true,
     message: "Message received. We will contact you shortly.",
   });
 
-  // background work
+  // ✅ background processing
   setImmediate(async () => {
     try {
       const { firstName, lastName, email, phone, message } = req.body;
+
+      // ✅ model-level required fields validation
+      if (!firstName || !lastName || !email || !phone || !message) {
+        console.warn("⚠️ Contact skipped: missing required fields");
+        return;
+      }
 
       const contact = await Contact.create({
         firstName,
@@ -54,20 +63,31 @@ const userHtml = (c) => `
         phone,
         message,
         source: "Contact Page",
+        status: "new", // ✅ matches model enum
+        ipAddress: req.ip,
+        userAgent: req.headers["user-agent"],
       });
 
+      // ✅ notify admin
       await sendMail({
         to: process.env.ADMIN_EMAIL,
         subject: "New Contact Message",
-        html: `<p>${contact.message}</p>`,
+        html: adminHtml(contact),
+        replyTo: contact.email,
       });
+
+      // ✅ confirmation to user
+      await sendMail({
+        to: contact.email,
+        subject: "We received your message",
+        html: userHtml(contact),
+      });
+
     } catch (err) {
-      console.error("Background contact error:", err.message);
+      console.error("❌ Background contact error:", err);
     }
   });
 };
-
-
 
 /* ------------------------------------------------ */
 /* GET ALL CONTACTS (ADMIN)                         */
@@ -102,6 +122,17 @@ export const getContactById = async (req, res) => {
 export const updateContactStatus = async (req, res) => {
   try {
     const { status } = req.body;
+
+    // ✅ matches model enum exactly
+    const allowedStatus = ["new", "replied", "closed"];
+
+    if (!allowedStatus.includes(status)) {
+      return res.status(400).json({
+        ok: false,
+        message: "Invalid status value",
+      });
+    }
+
     const updated = await Contact.findByIdAndUpdate(
       req.params.id,
       { status },

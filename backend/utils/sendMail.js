@@ -1,13 +1,21 @@
- // utils/sendMail.js
-import { Resend } from "resend";
+ import { Resend } from "resend";
 
 let resend = null;
 
-// Lazy + safe initialization
 export const sendMail = async ({ to, subject, html, text, replyTo }) => {
   try {
     if (!process.env.RESEND_API_KEY) {
       console.warn("⚠️ RESEND_API_KEY missing. Email skipped.");
+      return;
+    }
+
+    if (!to) {
+      console.warn("⚠️ Email skipped: recipient missing");
+      return;
+    }
+
+    if (!html && !text) {
+      console.warn("⚠️ Email skipped: no content");
       return;
     }
 
@@ -21,7 +29,7 @@ export const sendMail = async ({ to, subject, html, text, replyTo }) => {
       subject,
       html,
       text,
-      reply_to: replyTo,
+      reply_to: replyTo ? [replyTo] : undefined,
     });
 
     if (error) {
@@ -29,10 +37,9 @@ export const sendMail = async ({ to, subject, html, text, replyTo }) => {
       throw new Error(error.message);
     }
 
-    console.log("✅ Email sent via Resend:", data.id);
+    console.log("✅ Email sent:", data.id);
     return data;
   } catch (err) {
     console.error("❌ Email failed:", err.message);
-    // background me fail ho jaayega, server crash nahi karega
   }
 };
